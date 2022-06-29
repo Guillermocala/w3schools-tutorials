@@ -1,0 +1,60 @@
+{
+	"include": {
+		"prefix": "include",
+		"body": [
+			"#include <${1:/* library */}>"
+		],
+		"description": "cout structure"
+	},
+	"cout": {
+		"prefix": "cout",
+		"body": [
+			"cout << \"${1:/* message */}\" << endl;"
+		],
+		"description": "cout structure"
+	},
+	"cin": {
+		"prefix": "cin",
+		"body": [
+			"cin >> ${1:/*var*/};"
+		],
+		"description": "cin structure"
+	},
+	"out operator": {
+		"prefix": ["out", "operator"],
+		"body": [
+			"<<"
+		],
+		"description": "out operator"
+	},
+	"in operator": {
+		"prefix": ["in", "operator"],
+		"body": [
+			">>"
+		],
+		"description": "in operator"
+	},
+	"basic structure": {
+		"prefix": "basic",
+		"body": [
+			"#include <iostream>",
+			"",
+			"using namespace std;",
+			"",
+			"int main() {",
+			"\t${1:/*code*/}",
+			"\treturn 0;",
+			"}"
+		],
+		"description": "cpp basic structure"
+	},
+	"multi-line comment": {
+		"prefix": ["multi", "comment"],
+		"body": [
+			"/*",
+			"\t${1:}",
+			"*/"
+		],
+		"description": "cin structure"
+	}
+}  
