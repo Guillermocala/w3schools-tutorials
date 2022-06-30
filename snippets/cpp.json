@@ -34,6 +34,19 @@
 		],
 		"description": "in operator"
 	},
+	"switch case": {
+		"prefix": "switch",
+		"body": [
+			"switch (${1:/*expression*/}) {",
+			"\tcase x:",
+			"\t\t/*code*/",
+			"\t\tbreak;",
+			"\tdefault:",
+			"\t\t/*code*/",
+			"}"
+		],
+		"description": "switch case"
+	},
 	"basic structure": {
 		"prefix": "basic",
 		"body": [
@@ -57,4 +70,4 @@
 		],
 		"description": "cin structure"
 	}
-}  
+}
