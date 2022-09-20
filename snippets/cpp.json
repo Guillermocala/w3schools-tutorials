@@ -6,6 +6,31 @@
 		],
 		"description": "cout structure"
 	},
+	"simple structure": {
+		"prefix": ["simple", "structure"],
+		"body": [
+			"typedef struct{",
+			"\t${1:/*member*/}; ",
+			"} ${2:structure_variable_name};"
+		],
+		"description": "simple structure syntax"
+	},
+	"named structure": {
+		"prefix": ["named", "structure"],
+		"body": [
+			"typedef struct ${1:struct_name}{",
+			"\t${2:/*member*/}; ",
+			"};"
+		],
+		"description": "named structure syntax"
+	},
+	"ptr": {
+		"prefix": "ptr",
+		"body": [
+			"->"
+		],
+		"description": "arrow"
+	},
 	"cout": {
 		"prefix": "cout",
 		"body": [

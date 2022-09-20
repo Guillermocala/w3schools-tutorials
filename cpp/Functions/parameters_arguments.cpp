@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void helloUser(int numero=5);
+void helloUser(string nombre="nombre", string apellido="apellido");
 
 int main() {
     /*
@@ -22,10 +22,24 @@ int main() {
         A parameter with a default value, is often known as an 
         "optional parameter".
 
+        ---> You can't re-declare default arguments twice in the same 
+        scope. In practice, this means that default arguments (usually) 
+        appear only at the first declaration of the function.
         
+        MULTIPLE PARAMETERS
+
+        you can add as many parameters as you want.
+        when you are working with multiple parameters, the function call 
+        must have the same number of arguments as there are parameters
+        and the arguments must be passed in the same order.
     */
-    /*los parametros en el llamado son conocidos como parametros reales*/
-    helloUser(123);
+
+    /*
+        los parametros en el llamado son conocidos como parametros reales
+    */
+    cout << "Llamada normal: " << endl;
+    helloUser("Guillermo", "Cala");
+    cout << "Llamada sin parametros: " << endl;
     helloUser();
 
 
@@ -34,8 +48,10 @@ int main() {
 }
 
 
-void helloUser(int numero=5){
-    /*los parametros en la definicion y declaracion son conocidos
-    como parametros formales*/
-    cout << "Hello, " << numero << endl;
+void helloUser(string nombre, string apellido){
+    /*
+        los parametros en la definicion y declaracion son conocidos
+        como parametros formales
+    */
+    cout << "Hello, " << nombre << " " << apellido << endl;
 }

@@ -3,6 +3,7 @@
 using namespace std;
 
 // declaracion
+// type name_of_the_function (parameters)
 void helloWorld();
 
 int main() {
