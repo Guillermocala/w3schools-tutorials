@@ -5,6 +5,7 @@ class Cuenta{
         std::string titular;
         double cantidad;
 
+        Cuenta();
         Cuenta(std::string titular);
         Cuenta(std::string titular, double cantidad);
         void ingresar(double cantidad);

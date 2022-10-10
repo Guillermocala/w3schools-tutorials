@@ -3,6 +3,8 @@
 
 using namespace std;
 
+Cuenta::Cuenta(){}
+
 Cuenta::Cuenta(string titular){
     this->titular = titular;
 }
