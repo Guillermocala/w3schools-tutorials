@@ -1,3 +1,8 @@
+/*
+	El proposito de este ejercicio es el de 
+	separar la declaracion y definicion de la clase
+	del programa principal
+*/
 #include <iostream>
 #include "MyClass.h"
 

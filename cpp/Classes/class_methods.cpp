@@ -3,19 +3,19 @@
 using namespace std;
 
 class MyClass {        // The class
-  public:              // Access specifier
-    void myMethod() {  // Method/function defined inside the class
-      cout << "Hello World! From the 1st class" << endl;
-    }
+    public:              // Access specifier
+        void myMethod() {  // Method/function defined inside the class
+            cout << "Hello World! From the 1st class" << endl;
+        }
 };
 
 class MyClass2 {        // The class
-  public:              // Access specifier
-    void myMethod();   // Method/function declaration
+    public:              // Access specifier
+        void myMethod();   // Method/function declaration
 };
 
 void MyClass2::myMethod() {
-  cout << "Hello World! From the 2nd class" << endl;
+    cout << "Hello World! From the 2nd class" << endl;
 }
 
 int main() {

@@ -3,10 +3,37 @@
 using namespace std;
 
 class MyClass {
-  public:    // Public access specifier
-    int x;   // Public attribute
-  private:   // Private access specifier
-    int y;   // Private attribute
+  	public:    // Public access specifier
+		int x;   // Public attribute
+
+  	private:   // Private access specifier
+		int y;   // Private attribute
+};
+
+// Base class
+class Employee {
+  	protected: // Protected access specifier
+		int salary;
+};
+
+// Derived class
+class Programmer: public Employee {
+	public:
+		int bonus;
+		void setSalary(int s) {
+			salary = s;
+		}
+		int getSalary() {
+			return salary;
+		}
+		void setDato_privado(int dato_privado){
+			this->dato_privado = dato_privado;
+		}
+		int getDato_privado(){
+			return dato_privado;
+		}
+	private:
+		int dato_privado;
 };
 
 int main() {
@@ -29,6 +56,11 @@ int main() {
     MyClass myObj;
     myObj.x = 25;  // Allowed (public)
     // myObj.y = 50;  // Not allowed (private)
+	Programmer objeto1;
+	objeto1.setSalary(2000000);
+	objeto1.setDato_privado(2022);
+	cout << "El salario es: " << objeto1.getSalary() << endl;
+	cout << "El dato privado es: " << objeto1.getDato_privado() << endl;
 
     return 0;
 }

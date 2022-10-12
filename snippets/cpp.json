@@ -11,7 +11,7 @@
 		"body": [
 			"typedef struct{",
 			"\t${1:/*member*/}; ",
-			"} ${2:structure_variable_name};"
+			"} ${2:structure_variable_name};",
 		],
 		"description": "simple structure syntax"
 	},
@@ -20,7 +20,7 @@
 		"body": [
 			"typedef struct ${1:struct_name}{",
 			"\t${2:/*member*/}; ",
-			"};"
+			"};",
 		],
 		"description": "named structure syntax"
 	},
@@ -79,7 +79,7 @@
 			"",
 			"using namespace std;",
 			"",
-			"int main() {",
+			"int main(int argc, char* argv[]) {",
 			"\t${1:/*code*/}",
 			"\treturn 0;",
 			"}"
@@ -94,5 +94,12 @@
 			"*/"
 		],
 		"description": "cin structure"
+	},
+	"this": {
+		"prefix": "this",
+		"body": [
+			"this->"
+		],
+		"description": "this operator"
 	}
 }

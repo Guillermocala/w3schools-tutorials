@@ -41,3 +41,12 @@ g++ class.o main.o -o main
 // then only runs the main file, we named "main"
 ./main
 '''
+
+## u can also try this...
+'''
+// compile both and link
+g++ class.cpp main.cpp 
+// then only runs the main file
+./a
+'''
+

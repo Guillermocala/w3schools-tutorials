@@ -1,33 +1,31 @@
+/*
+    Implementacion de cuentas de banco en forma básica: solamente
+    nombre y cantidad.
+    Se implementa una estructura estática(array) y un sistema de
+    menu simple, usando metodos para simplificar el codigo.
+
+    El proposito gral de este ejercicio es separar la implementacion
+    y definicion de la(s) clases en archivos apartes.
+*/
 #include <iostream>
 #include <conio.h>
 #include "Class.h"
 
+#define CANT_CUENTAS 20
+
 using namespace std;
 
 int menu();
-
+string getName();
+double getAmount();
+void waitForUser();
+void showAccounts(Cuenta cuentas[CANT_CUENTAS], int index);
+int foundIndex(Cuenta cuentas[CANT_CUENTAS], int index, string nombre);
 
 int main(int argc, char* argv[]) {
-    /*
-    Cuenta cuenta1 = Cuenta("Andrea");
-    Cuenta cuenta2 = Cuenta("Guillermo", 20000);
-
-    cuenta1.setCantidad(2100000);
-
-    cout << cuenta1.toString() << endl;
-    cout << cuenta2.toString() << endl;
-
-    cout << "\nDespues de transacciones..." << endl;
-
-    cuenta1.ingresar(1000000);
-    cuenta2.retirar(4000000);
-
-    cout << cuenta1.toString() << endl;
-    cout << cuenta2.toString() << endl;
-    */
     
-    Cuenta cuentas[10];
-    int index = 0;
+    Cuenta cuentas[CANT_CUENTAS];
+    int index = 0, result;
     string nombre, temp;
     double cantidad;
 
@@ -37,111 +35,145 @@ int main(int argc, char* argv[]) {
             case 1:
                 /*insertar cuenta*/
                 cout << "\tInsertar cuenta" << endl;
-                cout << "Ingrese el nombre del titular: ";
-                getline(cin >> ws, nombre);
-                cout << "Ingrese la cantidad: ";
-                cin >> cantidad;
-                cuentas[index] = Cuenta(nombre, cantidad);
-                index++;
-                cout << "Pulse una tecla para continuar" << endl;
-                getch();
+                if(index <= CANT_CUENTAS){
+                    nombre = getName();
+                    cantidad = getAmount();
+                    cuentas[index] = Cuenta(nombre, cantidad);
+                    index++;
+                }
+                else{
+                    cout << "Ha alcanzado el limite de cuentas..." << endl;
+                }
+                waitForUser();
                 break;
             case 2:
                 /*buscar cuenta*/
                 cout << "\tBuscar cuenta" << endl;
-                cout << "Ingrese el nombre del titular: ";
-                getline(cin >> ws, nombre);
-                for(int i = 0; i < index; i++){
-                    if(cuentas[i].getTitular().compare(nombre) == 0){
-                        cout << cuentas[i].toString() << endl;
-                    }
+                nombre = getName();
+                result = foundIndex(cuentas, index, nombre);
+                if(result != -1){
+                    cout << cuentas[result].toString() << endl;
                 }
-                cout << "Pulse una tecla para continuar" << endl;
-                getch();
+                else{
+                    cout << "No encontrado!" << endl;
+                }
+                waitForUser();
                 break;
             case 3:
                 /*modificar cuenta*/
                 cout << "\tModificar cuenta" << endl;
-                cout << "Ingrese el nombre del titular: ";
-                getline(cin >> ws, nombre);
-                for(int i = 0; i < index; i++){
-                    if(cuentas[i].getTitular().compare(nombre) == 0){
-                        cout << "Ingrese el nuevo nombre del titular: ";
-                        getline(cin >> ws, nombre);
-                        cuentas[i].setTitular(nombre);
-                    }
+                nombre = getName();
+                result = foundIndex(cuentas, index, nombre);
+                if(result != -1){
+                    cout << "Ingrese el nuevo nombre del titular: ";
+                    getline(cin >> ws, nombre);
+                    cuentas[result].setTitular(nombre);
                 }
-                cout << "Pulse una tecla para continuar" << endl;
-                getch();
+                else{
+                    cout << "No encontrado!" << endl;
+                }
+                waitForUser();
                 break;
             case 4:
                 /*eliminar cuenta*/
                 cout << "\tEliminar cuenta" << endl;
-                cout << "Ingrese el nombre del titular: ";
-                getline(cin >> ws, nombre);
-                for(int i = 0; i < index; i++){
-                    if(cuentas[i].getTitular().compare(nombre) == 0){
-                        cuentas[i].setTitular("DELETED");
-                        cuentas[i].setCantidad(-999999);
-                    }
+                nombre = getName();
+                result = foundIndex(cuentas, index, nombre);
+                if(result != -1){
+                    cuentas[result].setTitular("DELETED");
+                    cuentas[result].setCantidad(-999999);
                 }
-                cout << "Pulse una tecla para continuar" << endl;
-                getch();
+                else{
+                    cout << "No encontrado!" << endl;
+                }
+                waitForUser();
                 break;
             case 5:
                 /*mostrar cuentas*/
                 cout << "\tMostrar cuenta" << endl;
-                for(int i = 0; i < index; i++){
-                    cout << cuentas[i].toString() << endl;
+                if(index == 0){
+                    cout << "No hay cuentas para mostrar!" << endl;
                 }
-                cout << "Pulse una tecla para continuar" << endl;
-                getch();
+                else{
+                    showAccounts(cuentas, index);
+                }
+                waitForUser();
                 break;
             case 6:
                 /*ingresar en cuenta*/
                 cout << "\tIngresar en cuenta" << endl;
-                cout << "Ingrese el nombre del titular: ";
-                getline(cin >> ws, nombre);
-                for(int i = 0; i < index; i++){
-                    if(cuentas[i].getTitular().compare(nombre) == 0){
-                        cout << "Ingrese la cantidad: ";
-                        cin >> cantidad;
-                        cuentas[i].ingresar(cantidad);
-                        cout << "Usted ha ingresado " << cantidad << ", Exitosamente!" << endl;
-                    }
+                nombre = getName();
+                result = foundIndex(cuentas, index, nombre);
+                if(result != -1){
+                    cantidad = getAmount();
+                    cuentas[result].ingresar(cantidad);
+                    cout << "Usted ha ingresado " << cantidad << ", Exitosamente!" << endl;
                 }
-                cout << "Pulse una tecla para continuar" << endl;
-                getch();
+                else{
+                    cout << "No encontrado!" << endl;
+                }
+                waitForUser();
                 break;
             case 7:
                 /*retirar de cuenta*/
                 cout << "\tRetirar de cuenta" << endl;
-                cout << "Ingrese el nombre del titular: ";
-                getline(cin >> ws, nombre);
-                for(int i = 0; i < index; i++){
-                    if(cuentas[i].getTitular().compare(nombre) == 0){
-                        cout << "Ingrese la cantidad: ";
-                        cin >> cantidad;
-                        cuentas[i].retirar(cantidad);
-                        cout << "Usted ha retirado " << cantidad << ", Exitosamente!" << endl;
-                    }
+                result = foundIndex(cuentas, index, nombre);
+                if(result != -1){
+                    cantidad = getAmount();
+                    cuentas[result].retirar(cantidad);
+                    cout << "Usted ha retirado " << cantidad << ", Exitosamente!" << endl;
                 }
-                cout << "Pulse una tecla para continuar" << endl;
-                getch();
+                else{
+                    cout << "No encontrado!" << endl;
+                }
+                waitForUser();
                 break;
             case 0:
                 /*salir*/
+                cout << "El programa se cerrara!" << endl;
                 activador = false;
-                cout << "Pulse una tecla para continuar" << endl;
-                getch();
+                waitForUser();
                 break;
             default:
                 /*unexpected function*/
                 break;
         }
     } while(activador);
-
     return 0;
+}
+
+string getName(){
+    string nombre;
+    cout << "Ingrese el nombre del titular: ";
+    getline(cin >> ws, nombre);
+    return nombre;
+}
+
+double getAmount(){
+    double cantidad;
+    cout << "Ingrese la cantidad: ";
+    cin >> cantidad;
+    return cantidad;
+}
+
+void waitForUser(){
+    cout << "Pulse una tecla para continuar" << endl;
+    getch();
+}
+
+void showAccounts(Cuenta cuentas[CANT_CUENTAS], int index){
+    for(int i = 0; i < index; i++){
+        cout << cuentas[i].toString() << endl;
+    }
+}
+
+int foundIndex(Cuenta cuentas[CANT_CUENTAS], int index, string nombre){
+    for(int i = 0; i < index; i++){
+        if(cuentas[i].getTitular().compare(nombre) == 0){
+            return i;
+        }
+    }
+    return -1;
 }
 
 int menu(){
@@ -163,7 +195,7 @@ int menu(){
     cout << "\t\t\t                              " << endl;
     cout << "\t\t\t     6 - Ingresar en cuenta   " << endl;
     cout << "\t\t\t                              " << endl;
-    cout << "\t\t\t     7 - Retirar  de cuenta   " << endl;
+    cout << "\t\t\t     7 - Retirar de cuenta    " << endl;
     cout << "\t\t\t                              " << endl;
     cout << "\t\t\t     0 - Salir                " << endl;
     cout << "\t\t\t                              " << endl;
@@ -177,7 +209,7 @@ int menu(){
             activador = false;
         }
         else{
-            cout << "Se debe ingresar un numero entre 1 y 5" << endl;
+            cout << "Se debe ingresar un numero entre 1 y 7" << endl;
         }
     } while(activador);
     return option;
